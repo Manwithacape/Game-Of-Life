@@ -17,7 +17,7 @@ public class GameBoard extends JPanel {
     private boolean[][] gameBoard;
     private boolean[][] nextGeneration;
 
-    private int cellSize = 60;  // Size of each cell in pixels
+    private int cellSize = 10;  // Size of each cell in pixels
 
     /**
      * Constructor for the GameBoard class
@@ -25,8 +25,8 @@ public class GameBoard extends JPanel {
      */
     public GameBoard() {
         this.setSize(600, 600); // Set the size of the JPanel same as the jframe will use
-        this.gameBoard = new boolean[10][10]; // Create a new 2D array for the game board
-        this.nextGeneration = new boolean[10][10]; // Create a new 2D array for the next generation
+        this.gameBoard = new boolean[600/cellSize][600/cellSize]; // Create a new 2D array for the game board
+        this.nextGeneration = new boolean[600/cellSize][600/cellSize]; // Create a new 2D array for the next generation
 
         // debug data to test the game board
         // this.gameBoard[1][1] = true;
@@ -84,7 +84,7 @@ public class GameBoard extends JPanel {
 
         // Copy the next generation to the game board
         gameBoard = nextGeneration;  // Let the garbage collector handle the old game board
-        nextGeneration = new boolean[10][10]; // Create a new 2D array for the next generation
+        nextGeneration = new boolean[600/cellSize][600/cellSize]; // Create a new 2D array for the next generation
 
 
     }
@@ -137,6 +137,18 @@ public class GameBoard extends JPanel {
 
         // Return the count of alive neighbours
         return count;
+    }
+
+    /**
+     * Method to clear the game board
+     * Sets all the cells to dead
+     */
+    public void clearBoard() {
+        for (int x = 0; x < gameBoard.length; x++) {
+            for (int y = 0; y < gameBoard[0].length; y++) {
+                gameBoard[x][y] = false;
+            }
+        }
     }
 
     @Override
